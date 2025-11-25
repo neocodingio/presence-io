@@ -1,6 +1,9 @@
 import { useState } from 'react'
 import { supabase } from '../lib/supabaseClient'
 
+const appUrl = import.meta.env.VITE_APP_URL || window.location.origin
+
+
 export default function LoginPage({ onLoginSuccess }) {
   const [email, setEmail] = useState('')
   const [loading, setLoading] = useState(false)
@@ -17,7 +20,7 @@ export default function LoginPage({ onLoginSuccess }) {
       const { error } = await supabase.auth.signInWithOtp({
         email: email,
         options: {
-          emailRedirectTo: window.location.origin,
+          emailRedirectTo: appUrl,
         },
       })
 
