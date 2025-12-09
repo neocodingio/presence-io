@@ -1,0 +1,16 @@
+# For Each example
+variable "environments" {
+  type        = map(string)
+  description = "Name of the student"
+  default = {
+    1 = "Development"
+    2 = "Staging"
+    3 = "Production"
+  }
+}
+
+resource "local_file" "foreach_example" {
+  for_each = var.environments
+  filename = "${path.module}/config-${each.value}.txt"
+  content  = "Environment name: ${each.key} - ${each.value}"
+}

@@ -1,0 +1,6 @@
+# Count example - creating multiple files
+resource "local_file" "count_example" {
+  count    = 2
+  filename = "${path.module}/file-${count.index}.txt"
+  content  = "This is file number ${count.index}"
+}
