@@ -1,6 +1,7 @@
 variable "bucket_name" {
   type        = string
   description = "S3 bucket name"
+  default     = "terraform-tutorial-mta-bucket"
 
   validation {
     condition = (

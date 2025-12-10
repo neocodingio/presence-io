@@ -3,7 +3,8 @@ variable "is_public" {
   default = false
 }
 
-variable "bucket_name" {
+variable "ec2_name" {
   type        = string
   description = "Name for the bucket."
+  default     = "terraform-tutorial-ec2"
 }

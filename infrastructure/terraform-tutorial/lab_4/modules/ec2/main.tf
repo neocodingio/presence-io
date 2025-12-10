@@ -3,6 +3,6 @@ resource "aws_instance" "example" {
   instance_type = "t3.micro"
 
   tags = {
-    Name = "HelloWorld"
+    Name = var.ec2_name
   }
 }
