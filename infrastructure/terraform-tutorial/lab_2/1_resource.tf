@@ -16,7 +16,7 @@ provider "local" {}
 #   error_message = "Spaces are not allowed in the file name."
 # }
 
-# Variables
+# Variable
 variable "file_name" {
   type        = string
   description = "Name of the student"
