@@ -8,6 +8,6 @@ terraform {
 }
 
 provider "aws" {
-  profile = "default"
+  profile = "devops-class"
   region  = "us-east-1"
 }

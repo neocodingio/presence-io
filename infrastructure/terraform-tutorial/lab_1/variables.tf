@@ -19,3 +19,14 @@ variable "topics" {
 locals {
   topics_list = ["variables", "outputs"]
 }
+
+
+variable "students_list" {
+  type        = map(string)
+  description = "Name of the students"
+  default = {
+    1 = "Development"
+    2 = "Staging"
+    3 = "Production"
+  }
+}
