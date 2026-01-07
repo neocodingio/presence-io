@@ -24,4 +24,4 @@ variable "file_name" {
   validation {
     condition     = can(regex("^[^ ]*$", var.file_name))
     error_message = "Spaces are not allowed in the file name."
-  }q
+  }
