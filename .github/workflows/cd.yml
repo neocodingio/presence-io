@@ -9,7 +9,7 @@ on:
 jobs:
   deploy:
     name: Deploy to EC2
-    runs-on: web-app
+    runs-on: web-app-new
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
