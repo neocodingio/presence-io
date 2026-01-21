@@ -25,7 +25,7 @@ function App() {
   }, [])
 
   if (loading) {
-    return <div className="flex items-center justify-center min-h-screen bg-red-500">Loading...</div>
+    return <div className="flex items-center justify-center min-h-screen bg-green-500">Loading...</div>
   }
 
   return (
