@@ -1,0 +1,30 @@
+# Gitleaks configuration
+# See https://github.com/gitleaks/gitleaks for more options
+
+title = "Gitleaks Secret Detection"
+
+[extend]
+# Use default rules
+useDefault = true
+
+[allowlist]
+description = "Allow list for known false positives"
+paths = [
+  '''\.gitignore$''',
+  '''package-lock\.json$''',
+  '''node_modules/''',
+  '''dist/''',
+  '''build/''',
+  '''\.env\.example$''',
+]
+
+# Ignore specific patterns (be careful with this!)
+regexes = [
+  '''example.*key''',
+  '''your_.*_key''',
+  '''placeholder''',
+  '''test.*key''',
+]
+
+# Ignore specific commits (if needed)
+commits = []
