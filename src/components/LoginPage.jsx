@@ -4,7 +4,7 @@ import { supabase } from '../lib/supabaseClient'
 const appUrl = import.meta.env.VITE_APP_URL || window.location.origin
 
 
-export default function LoginPage({ onLoginSuccess }) {
+export default function LoginPage() {
   const [email, setEmail] = useState('')
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState('')
@@ -30,7 +30,7 @@ export default function LoginPage({ onLoginSuccess }) {
         setMessage('Check your email for the magic link!')
         setEmail('')
       }
-    } catch (err) {
+    } catch {
       setError('An error occurred. Please try again.')
     } finally {
       setLoading(false)

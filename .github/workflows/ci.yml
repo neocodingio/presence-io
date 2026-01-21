@@ -15,7 +15,11 @@ on:
 jobs:
   build:
     name: Build
+<<<<<<< HEAD
     runs-on: web-app
+=======
+    runs-on: ubuntu-latest
+>>>>>>> f1649ed (feat(infra): add test and ci pipeline)
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -34,7 +38,11 @@ jobs:
 
   lint:
     name: Lint
+<<<<<<< HEAD
     runs-on: web-app
+=======
+    runs-on: ubuntu-latest
+>>>>>>> f1649ed (feat(infra): add test and ci pipeline)
     needs: build
     steps:
       - name: Checkout code
@@ -54,7 +62,11 @@ jobs:
 
   test:
     name: Unit Tests
+<<<<<<< HEAD
     runs-on: web-app
+=======
+    runs-on: ubuntu-latest
+>>>>>>> f1649ed (feat(infra): add test and ci pipeline)
     needs: build
     steps:
       - name: Checkout code
@@ -74,7 +86,11 @@ jobs:
 
   security:
     name: Secret Detection
+<<<<<<< HEAD
     runs-on: web-app
+=======
+    runs-on: ubuntu-latest
+>>>>>>> f1649ed (feat(infra): add test and ci pipeline)
     needs: build
     steps:
       - name: Checkout code
