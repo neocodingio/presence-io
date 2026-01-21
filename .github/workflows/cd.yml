@@ -19,15 +19,8 @@ jobs:
           cd /home/ec2-user/presence-io
           echo "📥 Pulling latest code..."
           git fetch origin
-
-          # Determine which branch to deploy
-          BRANCH=$(git branch -r | grep -E 'origin/(main|master)' | head -1 | sed 's/origin\///' | xargs)
-          if [ -z "$BRANCH" ]; then
-            BRANCH="main"
-          fi
-
-          echo "📌 Deploying branch: $BRANCH"
-          git reset --hard origin/$BRANCH
+          echo "📌 Deploying branch: ${{ github.ref_name }}"
+          git reset --hard origin/${{ github.ref_name }}
 
       - name: Install dependencies
         run: |
