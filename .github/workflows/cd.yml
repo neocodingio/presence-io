@@ -1,0 +1,54 @@
+name: CD
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  deploy:
+    name: Deploy to EC2
+    runs-on: self-hosted
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Pull latest changes
+        run: |
+          cd /home/ec2-user/presence-io
+          echo "📥 Pulling latest code..."
+          git fetch origin
+
+          # Determine which branch to deploy
+          BRANCH=$(git branch -r | grep -E 'origin/(main|master)' | head -1 | sed 's/origin\///' | xargs)
+          if [ -z "$BRANCH" ]; then
+            BRANCH="main"
+          fi
+
+          echo "📌 Deploying branch: $BRANCH"
+          git reset --hard origin/$BRANCH
+
+      - name: Install dependencies
+        run: |
+          cd /home/ec2-user/presence-io
+          echo "📦 Installing dependencies..."
+          npm ci
+
+      - name: Build application
+        run: |
+          cd /home/ec2-user/presence-io
+          echo "🔨 Building application..."
+          npm run build
+
+      - name: Restart PM2 process
+        run: |
+          cd /home/ec2-user/presence-io
+          echo "🔄 Restarting PM2 process..."
+          pm2 restart attendance || pm2 start npm --name "attendance" -- run dev
+
+      - name: Show deployment status
+        run: |
+          echo "✅ Deployment complete!"
+          pm2 list
+          pm2 logs attendance --lines 10 --nostream

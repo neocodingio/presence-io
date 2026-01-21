@@ -4,18 +4,14 @@ on:
   pull_request:
     branches:
       - main
-      - master
-      - develop
   push:
     branches:
       - main
-      - master
-      - develop
 
 jobs:
   build:
     name: Build
-    runs-on: web-app
+    runs-on: self-hosted
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -34,7 +30,7 @@ jobs:
 
   lint:
     name: Lint
-    runs-on: web-app
+    runs-on: self-hosted
     needs: build
     steps:
       - name: Checkout code
@@ -54,7 +50,7 @@ jobs:
 
   test:
     name: Unit Tests
-    runs-on: web-app
+    runs-on: self-hosted
     needs: build
     steps:
       - name: Checkout code
@@ -74,7 +70,7 @@ jobs:
 
   security:
     name: Secret Detection
-    runs-on: web-app
+    runs-on: self-hosted
     needs: build
     steps:
       - name: Checkout code

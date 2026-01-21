@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { supabase } from '../lib/supabaseClient'
 import { subjects } from '../data/subjects'
 import confetti from 'canvas-confetti'
@@ -9,12 +9,7 @@ export default function AttendancePage({ session }) {
   const [successMessage, setSuccessMessage] = useState('')
   const [stats, setStats] = useState({})
 
-  // Fetch current attendance records on mount
-  useEffect(() => {
-    fetchAttendance()
-  }, [])
-
-  const fetchAttendance = async () => {
+  const fetchAttendance = useCallback(async () => {
     try {
       const { data, error } = await supabase
         .from('attendance')
@@ -53,7 +48,12 @@ export default function AttendancePage({ session }) {
     } finally {
       setLoading(false)
     }
-  }
+  }, [session.user.email])
+
+  // Fetch current attendance records on mount
+  useEffect(() => {
+    fetchAttendance()
+  }, [fetchAttendance])
 
   const calculateStreak = (records) => {
     if (records.length === 0) return 0
