@@ -148,14 +148,14 @@ export default function AttendancePage({ session }) {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-purple-500 to-blue-600">
+      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-500 to-blue-600">
         <div className="text-white text-2xl font-bold">Loading...</div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-500 to-blue-600 p-8">
+    <div className="min-h-screen bg-gradient-to-br from-blue-500 to-blue-600 p-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="flex items-center justify-between mb-12">
@@ -163,7 +163,7 @@ export default function AttendancePage({ session }) {
             <h1 className="text-5xl font-bold text-white flex items-center gap-3">
               🏆 Attendance Tracker
             </h1>
-            <p className="text-purple-100 mt-2 text-lg">{session.user.email}</p>
+            <p className="text-blue-100 mt-2 text-lg">{session.user.email}</p>
           </div>
           <button
             onClick={() => supabase.auth.signOut()}
