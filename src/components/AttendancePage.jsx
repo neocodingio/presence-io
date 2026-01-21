@@ -163,7 +163,7 @@ export default function AttendancePage({ session }) {
             <h1 className="text-5xl font-bold text-white flex items-center gap-3">
               🏆 Attendance Tracker
             </h1>
-            <p className="text-blue-100 mt-2 text-lg">{session.user.email}</p>
+            <p className="text-red-100 mt-2 text-lg">{session.user.email}</p>
           </div>
           <button
             onClick={() => supabase.auth.signOut()}
