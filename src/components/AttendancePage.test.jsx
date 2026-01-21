@@ -55,7 +55,7 @@ describe('AttendancePage', () => {
     const mockQuery = {
       select: vi.fn(() => ({
         eq: vi.fn(() => ({
-          order: vi.fn(() => new Promise(() => {})), // Never resolves
+          order: vi.fn(() => new Promise(() => { })), // Never resolves
         })),
       })),
     }
@@ -175,5 +175,46 @@ describe('AttendancePage', () => {
     await waitFor(() => {
       expect(screen.getByText(/great! you're all set/i)).toBeInTheDocument()
     })
+  })
+
+  it('should have red background color on the main page', async () => {
+    const mockQuery = {
+      select: vi.fn(() => ({
+        eq: vi.fn(() => ({
+          order: vi.fn(() => Promise.resolve({ data: [], error: null })),
+        })),
+      })),
+    }
+    supabase.from.mockReturnValue(mockQuery)
+
+    const { container } = render(<AttendancePage session={mockSession} />)
+
+    await waitFor(() => {
+      expect(screen.queryByText(/loading/i)).not.toBeInTheDocument()
+    })
+
+    // Find the main container div with min-h-screen
+    const mainContainer = container.querySelector('.min-h-screen.bg-red-500')
+    expect(mainContainer).toBeInTheDocument()
+    expect(mainContainer?.className).toContain('bg-red-500')
+  })
+
+  it('should have red background color on the loading state', () => {
+    // Mock a delayed response
+    const mockQuery = {
+      select: vi.fn(() => ({
+        eq: vi.fn(() => ({
+          order: vi.fn(() => new Promise(() => { })), // Never resolves
+        })),
+      })),
+    }
+    supabase.from.mockReturnValue(mockQuery)
+
+    const { container } = render(<AttendancePage session={mockSession} />)
+
+    // Find the loading container div
+    const loadingContainer = container.querySelector('.min-h-screen.bg-red-500')
+    expect(loadingContainer).toBeInTheDocument()
+    expect(loadingContainer?.className).toContain('bg-red-500')
   })
 })

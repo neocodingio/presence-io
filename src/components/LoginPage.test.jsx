@@ -112,4 +112,13 @@ describe('LoginPage', () => {
       expect(submitButton).not.toBeDisabled()
     })
   })
+
+  it('should have red background color on the login page', () => {
+    const { container } = render(<LoginPage />)
+
+    // Find the main container div with min-h-screen
+    const mainContainer = container.querySelector('.min-h-screen.bg-red-500')
+    expect(mainContainer).toBeInTheDocument()
+    expect(mainContainer?.className).toContain('bg-red-500')
+  })
 })
