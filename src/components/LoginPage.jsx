@@ -38,7 +38,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-red-500 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-green-500 flex items-center justify-center p-4">
       <div className="bg-white rounded-lg shadow-2xl p-8 w-full max-w-md">
         {/* Trophy/Badge Logo */}
         <div className="text-center mb-8">

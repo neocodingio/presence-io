@@ -148,14 +148,14 @@ export default function AttendancePage({ session }) {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-red-500">
+      <div className="flex items-center justify-center min-h-screen bg-green-500">
         <div className="text-white text-2xl font-bold">Loading...</div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-red-500 p-8">
+    <div className="min-h-screen bg-green-500 p-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="flex items-center justify-between mb-12">
