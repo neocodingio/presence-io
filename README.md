@@ -109,11 +109,31 @@ The CI pipeline includes the following checks (each as a separate status check):
 
 All checks must pass before a PR can be merged (if branch protection is enabled).
 
-### Workflow File
+### CI Workflow
 
-The workflow is defined in `.github/workflows/ci.yml` and runs on:
+The CI workflow is defined in `.github/workflows/ci.yml` and runs on:
 - Pull requests to `main`, `master`, or `develop` branches
 - Pushes to `main`, `master`, or `develop` branches
+
+### CD Pipeline (Continuous Delivery)
+
+The CD workflow automatically deploys to EC2 when code is merged to `main` or `master` branches.
+
+**Deployment Steps:**
+1. Pulls latest code from repository
+2. Installs/updates dependencies (`npm ci`)
+3. Builds the application (`npm run build`)
+4. Restarts PM2 process (`attendance`) to load new code
+
+**Workflow File**: `.github/workflows/cd.yml`
+
+**Self-Hosted Runner:**
+This workflow runs on a self-hosted GitHub Actions runner (`web-app`) that is already configured on the EC2 server. No SSH configuration or secrets are required.
+
+**Note**: The runner must be registered and running on the EC2 instance for deployments to work.
+
+**PM2 Process:**
+The deployment expects a PM2 process named `attendance` running on the EC2 server. If the process doesn't exist, it will be started automatically.
 
 ## Expanding the ESLint configuration
 
